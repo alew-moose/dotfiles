@@ -1,0 +1,11 @@
+set shell sh
+
+map e up
+map n down
+map y updir
+map o open
+map <enter> open
+
+map j search-next
+map J search-prev
+

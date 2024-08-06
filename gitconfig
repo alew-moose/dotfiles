@@ -1,0 +1,22 @@
+[user]
+  name = Alex Grehov
+  email = aleksandrgrekhov1987@gmail.com
+[core]
+  editor = nvim
+[merge]
+  tool = nvim -d
+[color]
+  ui = auto
+[credential]
+  helper = cache
+[crendential]
+  helper = cache
+[alias]
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  dc = diff --cached
+  poh = push origin HEAD
+[pull]
+	ff = only

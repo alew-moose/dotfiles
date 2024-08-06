@@ -1,0 +1,11 @@
+#!/bin/bash
+
+xset s off
+# xset s noblank
+xset -dpms
+
+xset m 1 1
+xset r rate 250 40
+xset b off
+setxkbmap -option grp:alt_shift_toggle,grp_led:scroll us\(workman\),ru
+setxkbmap -option 'caps:swapescape'
