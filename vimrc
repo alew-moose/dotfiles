@@ -79,7 +79,7 @@ set expandtab
 " set preserveindent
 " set copyindent
 
-set lazyredraw
+" set lazyredraw
 if has("autocmd")
   filetype plugin indent on
 endif
