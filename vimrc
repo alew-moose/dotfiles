@@ -108,6 +108,8 @@ let g:tagbar_autoclose = 1
 nnoremap <C-f> :Ack<SPACE>
 let g:ackhighlight = 1
 
+nnoremap <C-p> :FZF<CR>
+
 let s:vimwiki_path = '~/Documents/wiki/'
 
 nnoremap <silent> <Leader>wv :!ghostwriter 2>/dev/null "%" &<CR>
