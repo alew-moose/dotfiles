@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-vinegar'
     Plug 'tpope/vim-rsi'
+    Plug 'tpope/vim-fugitive'
     Plug 'mileszs/ack.vim'
     Plug 'vimwiki/vimwiki'
     Plug 'jstemmer/gotags', { 'for': 'go' }
