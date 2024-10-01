@@ -152,6 +152,7 @@ autocmd Filetype go nmap  <Leader>gt <Plug>(go-def-type)
 autocmd Filetype go nmap  <Leader>gr <Plug>(go-referrers)
 autocmd Filetype go nmap E <Plug>(go-doc)
 
+let g:go_fmt_autosave = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_auto_type_info = 0
 let g:go_info_mode = 'guru'
@@ -189,9 +190,9 @@ let g:tagbar_type_go = {
 
 set matchpairs+=<:>
 
-if exists(':tnoremap')
-    tnoremap <Esc> <C-\><C-n>
-endif
+" if exists(':tnoremap')
+"     tnoremap <Esc> <C-\><C-n>
+" endif
 
 " highlight ExtraWhitespace ctermbg=red guibg=red
 " autocmd BufWinEnter * match ExtraWhitespace /\s\+$\| \+\t/
@@ -202,6 +203,7 @@ endif
 " for vim-commentary
 autocmd Filetype ocaml setlocal commentstring=\(*%s*\)
 autocmd Filetype sql setlocal commentstring=--\ %s
+autocmd BufWritePost *.go silent !hypfmt -w <afile>
 
 " for vim-slime
 nmap <C-c> <Plug>SlimeMotionSend
