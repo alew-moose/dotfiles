@@ -28,6 +28,8 @@ alias xo='xclip -o'
 alias sl='show-lyrics'
 alias pga='pgrep -a'
 
+alias ansible-activate='source ~/Work/ansible/venv/bin/activate && export ANSIBLE_CONFIG=~/Work/ansible/ansible.cfg'
+
 set_ps1() {
     user="\[\033[$1m\]\u\[\033[m\]"
     host=$HOSTNAME
