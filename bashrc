@@ -46,4 +46,5 @@ case $USER in
 esac
 unset -f set_ps1
 
-eval "$(fzf --bash)"
+# eval "$(fzf --bash)"
+source /usr/share/doc/fzf/examples/key-bindings.bash
