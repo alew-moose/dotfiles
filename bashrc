@@ -17,6 +17,7 @@ export MANPAGER='nvim +Man!'
 
 export GOPATH=~/.local/share/go
 export PATH=~/.local/bin:$GOPATH/bin:$PATH
+export GOROOT=/usr/lib/go
 
 alias ls='ls --color=auto'
 alias ll='ls -l'
@@ -27,6 +28,7 @@ alias xi='xclip -i'
 alias xo='xclip -o'
 alias sl='show-lyrics'
 alias pga='pgrep -a'
+alias fd='fdfind'
 
 alias ansible-activate='source ~/Work/ansible/venv/bin/activate && export ANSIBLE_CONFIG=~/Work/ansible/ansible.cfg'
 

@@ -20,3 +20,9 @@
   poh = push origin HEAD
 [pull]
 	ff = only
+
+# [url "ssh://git@gitlab.hyperus.team/"]
+# [url "ssh://gitlab.hyperus.team/"]
+[url "git@gitlab.hyperus.team:hyp-platform/hyperus.git"]
+  insteadOf = https://gitlab.hyperus.team/
+

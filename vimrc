@@ -148,6 +148,7 @@ endif
 autocmd Filetype go nmap  <Leader>ge <Plug>(go-if-err)
 autocmd Filetype go nmap  <Leader>gi <Plug>(go-info)
 autocmd Filetype go nmap  <Leader>gI <Plug>(go-imports)
+autocmd Filetype go nmap  <Leader>gm <Plug>(go-implements)
 autocmd Filetype go nmap  <Leader>gt <Plug>(go-def-type)
 autocmd Filetype go nmap  <Leader>gr <Plug>(go-referrers)
 autocmd Filetype go nmap E <Plug>(go-doc)
