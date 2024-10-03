@@ -41,3 +41,5 @@ case $USER in
     *)    set_ps1 '1;37' ;;
 esac
 unset -f set_ps1
+
+eval "$(fzf --bash)"
