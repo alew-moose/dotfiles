@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
+    Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' }
 call plug#end()
 
 noremap l o
@@ -70,7 +71,7 @@ let g:netrw_winsize = 25
 " let g:netrw_browse_split = 4
 " let g:netrw_list_hide = &wildignore
 
-set pastetoggle=<F12>
+nnoremap <silent> <F12> :set paste!<CR>
 
 set shiftwidth=2
 set tabstop=2
@@ -142,7 +143,7 @@ color jellybeans
 let g:slime_target='tmux'
 
 if executable('rg')
-    let g:ackprg = 'rg --vimgrep'
+    let g:ackprg = 'rg --smart-case --vimgrep'
 endif
 
 autocmd Filetype go nmap  <Leader>ge <Plug>(go-if-err)
