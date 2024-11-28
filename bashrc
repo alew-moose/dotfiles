@@ -31,6 +31,8 @@ alias pga='pgrep -a'
 alias fd='fdfind'
 
 alias ansible-activate='source ~/Work/ansible/venv/bin/activate && export ANSIBLE_CONFIG=~/Work/ansible/ansible.cfg'
+alias vpn-up='wg-quick up ~/.local/share/vpn.conf'
+alias vpn-down='wg-quick down ~/.local/share/vpn.conf'
 
 set_ps1() {
     user="\[\033[$1m\]\u\[\033[m\]"
@@ -48,3 +50,4 @@ unset -f set_ps1
 
 # eval "$(fzf --bash)"
 source /usr/share/doc/fzf/examples/key-bindings.bash
+
