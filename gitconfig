@@ -4,7 +4,8 @@
 [core]
   editor = nvim
 [merge]
-  tool = nvim -d
+  tool = nvimdiff
+  layout = "LOCAL,BASE,REMOTE / MERGED"
 [color]
   ui = auto
 [credential]
@@ -23,6 +24,6 @@
 
 # [url "ssh://git@gitlab.hyperus.team/"]
 # [url "ssh://gitlab.hyperus.team/"]
-[url "git@gitlab.hyperus.team:hyp-platform/hyperus.git"]
-  insteadOf = https://gitlab.hyperus.team/
+# [url "git@gitlab.hyperus.team:hyp-platform/hyperus.git"]
+#   insteadOf = https://gitlab.hyperus.team/
 
