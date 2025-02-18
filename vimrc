@@ -11,13 +11,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'mileszs/ack.vim'
     Plug 'vimwiki/vimwiki'
     Plug 'jstemmer/gotags', { 'for': 'go' }
-    Plug 'jpalardy/vim-slime', { 'for': ['scheme', 'lua', 'ocaml', 'sql'] }
+    Plug 'jpalardy/vim-slime', { 'for': ['scheme', 'lua', 'ocaml', 'sql', 'python'] }
     Plug 'majutsushi/tagbar'
     Plug 'nanotech/jellybeans.vim'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' }
+    " Plug 'python-mode/python-mode', { 'for': 'python' }
 call plug#end()
 
 noremap l o
@@ -126,6 +127,7 @@ let wiki.nested_syntaxes = {
     \ 'make': 'make',
     \ 'ocaml': 'ocaml',
     \ 'perl': 'perl',
+    \ 'python': 'python',
     \ 'scheme': 'scheme',
     \ 'sh': 'sh',
     \ 'sql': 'sql',
@@ -157,9 +159,10 @@ autocmd Filetype go nmap E <Plug>(go-doc)
 let g:go_fmt_autosave = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_auto_type_info = 0
-let g:go_info_mode = 'guru'
+" let g:go_info_mode = 'guru'
 let g:go_decls_mode = 'ctrlp.vim'
 let g:go_doc_popup_window = 1
+let g:go_def_mode = 'gopls'
 let g:go_imports_autosave = 0
 
 let g:tagbar_type_go = {
