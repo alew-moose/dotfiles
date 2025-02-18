@@ -19,6 +19,8 @@ export GOPATH=~/.local/share/go
 export PATH=~/.local/bin:$GOPATH/bin:$PATH
 export GOROOT=/usr/lib/go
 
+go env -w GOPRIVATE=*.hyperus.team
+
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -A'
