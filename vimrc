@@ -207,7 +207,9 @@ set matchpairs+=<:>
 
 " for vim-commentary
 autocmd Filetype ocaml setlocal commentstring=\(*%s*\)
-autocmd Filetype sql setlocal commentstring=--\ %s
+autocmd Filetype sql   setlocal commentstring=--\ %s
+autocmd Filetype proto setlocal commentstring=//\ %s
+
 autocmd BufWritePost *.go silent !hypfmt -w <afile>
 
 " for vim-slime
