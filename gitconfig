@@ -1,6 +1,8 @@
 [user]
   name = Aleksandr Grekhov
-  email = aleksandr.grekhov@hyperus.team
+  email = aleksandrgrekhov1987@gmail.com
+[init]
+  defaultBranch = main
 [core]
   editor = nvim
 [merge]
@@ -20,10 +22,4 @@
   dc = diff --cached
   poh = push origin HEAD
 [pull]
-	ff = only
-
-# [url "ssh://git@gitlab.hyperus.team/"]
-# [url "ssh://gitlab.hyperus.team/"]
-# [url "git@gitlab.hyperus.team:hyp-platform/hyperus.git"]
-#   insteadOf = https://gitlab.hyperus.team/
-
+  ff = only

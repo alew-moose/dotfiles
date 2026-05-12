@@ -3,6 +3,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+
 call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-vinegar'
@@ -11,10 +12,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'mileszs/ack.vim'
     Plug 'vimwiki/vimwiki'
     Plug 'jstemmer/gotags', { 'for': 'go' }
-    Plug 'jpalardy/vim-slime', { 'for': ['scheme', 'lua', 'ocaml', 'sql', 'python'] }
+    Plug 'jpalardy/vim-slime', { 'for': ['scheme', 'lua', 'ocaml', 'sql', 'python', 'perl'] }
     Plug 'majutsushi/tagbar'
     Plug 'nanotech/jellybeans.vim'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'dense-analysis/ale'
+    Plug 'rust-lang/rust.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' }
@@ -107,6 +110,7 @@ silent !mkdir ~/.vim/swp > /dev/null 2>&1
 nnoremap <silent> <Leader>t :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
+let g:tagbar_ctags_bin = 'ctags-universal'
 
 nnoremap <C-f> :Ack<SPACE>
 let g:ackhighlight = 1
@@ -123,10 +127,12 @@ let wiki.ext = '.md'
 let wiki.nested_syntaxes = {
     \ 'c': 'c',
     \ 'go': 'go',
+    \ 'json': 'json',
     \ 'lua': 'lua',
     \ 'make': 'make',
     \ 'ocaml': 'ocaml',
     \ 'perl': 'perl',
+    \ 'proto': 'proto',
     \ 'python': 'python',
     \ 'scheme': 'scheme',
     \ 'sh': 'sh',
@@ -143,25 +149,27 @@ syntax on
 color jellybeans
 
 let g:slime_target='tmux'
+let g:slime_bracketed_paste=1 " иначе python ломается
 
 if executable('rg')
     let g:ackprg = 'rg --smart-case --vimgrep'
 endif
 
-autocmd Filetype go nmap  <Leader>ge <Plug>(go-if-err)
-autocmd Filetype go nmap  <Leader>gi <Plug>(go-info)
-autocmd Filetype go nmap  <Leader>gI <Plug>(go-imports)
-autocmd Filetype go nmap  <Leader>gm <Plug>(go-implements)
-autocmd Filetype go nmap  <Leader>gt <Plug>(go-def-type)
-autocmd Filetype go nmap  <Leader>gr <Plug>(go-referrers)
-autocmd Filetype go nmap E <Plug>(go-doc)
+autocmd Filetype go nmap <buffer> <Leader>ge <Plug>(go-if-err)
+autocmd Filetype go nmap <buffer> <Leader>gi <Plug>(go-info)
+autocmd Filetype go nmap <buffer> <Leader>gI <Plug>(go-imports)
+autocmd Filetype go nmap <buffer> <Leader>gm <Plug>(go-implements)
+autocmd Filetype go nmap <buffer> <Leader>gt <Plug>(go-def-type)
+autocmd Filetype go nmap <buffer> <Leader>gr <Plug>(go-referrers)
+autocmd Filetype go nmap <buffer> E <Plug>(go-doc)
 
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_auto_type_info = 0
 " let g:go_info_mode = 'guru'
 let g:go_decls_mode = 'ctrlp.vim'
 let g:go_doc_popup_window = 1
+" let g:go_doc_balloon = 1
 let g:go_def_mode = 'gopls'
 let g:go_imports_autosave = 0
 
@@ -193,6 +201,55 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+let g:vim_json_conceal = 0
+
+" rust
+let g:rustfmt_autosave = 1
+let g:ale_close_preview_on_insert = 1
+let g:ale_completion_enabled = 1
+let g:ale_hover_to_floating_preview = 1
+let g:ale_linters = {
+\  'rust': ['analyzer'],
+\ }
+let g:ale_set_quickfix = 0
+let g:ale_set_loclist = 0
+
+
+" TODO:
+" `:ALEReset`       - `<Plug>(ale_reset)`
+" `:ALEResetBuffer` - `<Plug>(ale_reset_buffer)`
+
+
+" let g:ale_fixers = { 'rust': ['rustfmt'] }
+
+nnoremap <Leader> <Space> <Plug>(ale_reset_buffer)
+
+function! CloseAlePopup() abort
+    let l:mode = mode()
+    let l:restore_visual = l:mode is# 'v' || l:mode is# 'V' || l:mode is# "\<C-V>"
+
+    if !exists('w:preview')
+        return
+    endif
+
+    call setbufvar(w:preview['buffer'], '&modified', 0)
+
+    if win_id2win(w:preview['id']) > 0
+        execute win_id2win(w:preview['id']).'wincmd c'
+    endif
+
+    unlet w:preview
+
+    if l:restore_visual
+        normal! gv
+    endif
+endfunction
+
+" autocmd Filetype rust set completeopt=menu,menuone,preview,noselect,noinsert
+autocmd Filetype rust nnoremap <silent> <buffer> <C-]> <Plug>(ale_go_to_definition)
+autocmd Filetype rust nnoremap <silent> <buffer> E <Plug>(ale_hover)
+autocmd Filetype rust nnoremap <buffer> <silent> <Esc> :call CloseAlePopup()<CR>
+
 set matchpairs+=<:>
 
 " if exists(':tnoremap')
@@ -210,8 +267,6 @@ autocmd Filetype ocaml setlocal commentstring=\(*%s*\)
 autocmd Filetype sql   setlocal commentstring=--\ %s
 autocmd Filetype proto setlocal commentstring=//\ %s
 
-autocmd BufWritePost *.go silent !hypfmt -w <afile>
-
 " for vim-slime
 nmap <C-c> <Plug>SlimeMotionSend
 
@@ -224,6 +279,7 @@ augroup WrapLineInVimwiki
     autocmd FileType vimwiki setlocal nowrap
 augroup END
 
+autocmd BufNewFile,BufRead *.sls set filetype=scheme
 
 
 if &term ==# 'xterm-256color' || &term ==# 'screen-256color' || &term ==# 'xterm-termite'
@@ -235,4 +291,3 @@ if exists('$TMUX')
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 endif
-
