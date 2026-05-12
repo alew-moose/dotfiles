@@ -9,6 +9,9 @@ export LC_MEASUREMENT=en_US.UTF-8
 export LC_TIME=en_US.UTF-8
 export LC_NAME=en_US.UTF-8
 
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
 export EDITOR=nvim
 export TERMINAL=sakura
 export BROWSER=firefox
@@ -16,7 +19,14 @@ export TERM="screen-256color"
 export MANPAGER='nvim +Man!'
 
 export GOPATH=~/.local/share/go
-export PATH=~/.local/bin:$GOPATH/bin:$PATH
+export PATH=/usr/lib/go-1.25/bin:~/.local/bin:$GOPATH/bin:$PATH
+export GOROOT=/usr/lib/go-1.25
+
+export PATH=~/.local/share/zig-x86_64-linux-0.15.2:$PATH
+
+# export CHEZSCHEMELIBDIRS=.:~/.local/share/chez-scheme/libs
+
+# go env -w GOPRIVATE=*.hyperus.team
 
 alias ls='ls --color=auto'
 alias ll='ls -l'
@@ -27,6 +37,11 @@ alias xi='xclip -i'
 alias xo='xclip -o'
 alias sl='show-lyrics'
 alias pga='pgrep -a'
+alias fd='fdfind'
+
+# alias ansible-activate='source ~/Work/ansible/venv/bin/activate && export ANSIBLE_CONFIG=~/Work/ansible/ansible.cfg'
+# alias vpn-up='wg-quick up ~/.local/share/vpn.conf'
+# alias vpn-down='wg-quick down ~/.local/share/vpn.conf'
 
 set_ps1() {
     user="\[\033[$1m\]\u\[\033[m\]"
@@ -42,4 +57,7 @@ case $USER in
 esac
 unset -f set_ps1
 
-eval "$(fzf --bash)"
+# eval "$(fzf --bash)"
+source /usr/share/doc/fzf/examples/key-bindings.bash
+
+. "$HOME/.cargo/env"
