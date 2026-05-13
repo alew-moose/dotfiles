@@ -1,11 +1,12 @@
 [user]
-  name = Aleksandr Grekhov
-  email = aleksandrgrekhov1987@gmail.com
+  name = Aleksandr Grehov
+  email = a.grehov@crazypandagames.com
 [init]
   defaultBranch = main
 [core]
   editor = nvim
 [merge]
+  ff = false
   tool = nvimdiff
   layout = "LOCAL,BASE,REMOTE / MERGED"
 [color]
@@ -21,5 +22,12 @@
   st = status
   dc = diff --cached
   poh = push origin HEAD
+
+  pr = "!git diff $(git merge-base origin/master origin/${1})..origin/${1} #"
+  pr2 = "!git diff $(git merge-base ${1} ${2})..${2} #"
+  out = log --branches --not --remotes #аналог hg out, список коммитов, которые будут запушены
+  lg = log  --graph --pretty=format:'%C(yellow)%h %C(auto) %ad %C(cyan)%<(12,trunc)%aN %C(auto)-%C(yellow)%d%Creset %s' --color --date=format:'%d %b %H:%M' # красивый краткий лог, --all для всех веток
+  wdiff = !git diff --color-words='([^[:alnum:]]|[^[:space:]])' \"$@\" && # дифф по словам, а-ля гитхаб
+  wshow = !git show --color-words='([^[:alnum:]]|[^[:space:]])' \"$@\" && :
 [pull]
   ff = only
