@@ -210,6 +210,7 @@ let g:ale_completion_enabled = 1
 let g:ale_hover_to_floating_preview = 1
 let g:ale_linters = {
 \  'rust': ['analyzer'],
+\  'perl': ['perlnavigator'],
 \ }
 let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 0
@@ -249,6 +250,35 @@ endfunction
 autocmd Filetype rust nnoremap <silent> <buffer> <C-]> <Plug>(ale_go_to_definition)
 autocmd Filetype rust nnoremap <silent> <buffer> E <Plug>(ale_hover)
 autocmd Filetype rust nnoremap <buffer> <silent> <Esc> :call CloseAlePopup()<CR>
+
+autocmd Filetype perl nnoremap <silent> <buffer> <C-]> <Plug>(ale_go_to_definition)
+autocmd Filetype perl nnoremap <silent> <buffer> E <Plug>(ale_hover)
+autocmd Filetype perl nnoremap <buffer> <silent> <Esc> :call CloseAlePopup()<CR>
+
+" let g:ale_perl_perlnavigator_config = {
+" \   'perlnavigator': {
+" \       'enableWarnings': 1,
+" \       'includePaths': [ $HOME . '/MyPerlStuff/lib', '/tmp/tmp.7qSgUo34e' ],
+" \       'perlEnvAdd': 1,
+" \       'perlEnv': {
+" \           'PERL_DL_NONLAZY': 1,
+" \       },
+" \       'perlPath': substitute(g:ale_perl_perl_executable, '/perl$', '', ''),
+" \       'perlcriticEnabled': 1,
+" \       'perlcriticProfile': '$workspaceFolder/.perlcriticrc',
+" \       'perltidyProfile': '$workspaceFolder/.perltidyrc',
+" \       'perlcriticSeverity': 2,
+" \   },
+" \ }
+
+let g:ale_perl_perlnavigator_config = {
+\   'perlnavigator': {
+\       'enableWarnings': 1,
+\       'includePaths': [ $HOME . '/Work/crazypanda/poker/server'],
+\       'perlcriticEnabled': 0,
+\   },
+\}
+
 
 set matchpairs+=<:>
 
